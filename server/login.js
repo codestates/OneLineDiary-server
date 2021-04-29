@@ -1,25 +1,16 @@
 const express = require("express");
+const app = express();
+const port = 80;
 const cors = require("cors");
 const db = require("./db/connection");
 const jwt = require("jsonwebtoken");
 const { Users } = require(`'../../models'와 같은 model의 위치`);
-const logger = require("morgan");
-const https = require("https");
-const fs = require("fs");
-
-const app = express();
-const port = 4000;
-
-app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 
 //cors 처리
 app.use(
   cors({
-    origin: "https://localhost:3000",
+    origin: true,
     credentials: true,
-    methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
   })
 );
 //로그인 하면 토큰이 발급 된다.
@@ -107,27 +98,6 @@ app.get(`/어떤주소를 넣어야할지 모르겠음`, (req, res) => {
   });
 });
 
-// app.listen(port, () => {
-//   console.log(`서버가 http://localhost:${port}에서 작동 중입니다.`);
-// });
-
-//근화님 코드
-let server;
-
-if (fs.existsSync("./key.pem") && fs.existsSync("./cert.pem")) {
-  server = https
-    .createServer(
-      {
-        key: fs.readFileSync(__dirname + `/` + "key.pem", "utf-8"),
-        cert: fs.readFileSync(__dirname + `/` + "cert.pem", "utf-8"),
-      },
-      app
-    )
-    .listen(port);
-} else {
-  server = app.listen(port, () => {
-    console.log(`server listening on ${port}`);
-  });
-}
-
-module.exports = server;
+app.listen(port, () => {
+  console.log(`서버가 http://localhost:${port}에서 작동 중입니다.`);
+});
