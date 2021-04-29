@@ -1,28 +1,11 @@
 const express = require("express");
 const cors = require("cors");
-const session = require("express-session");
 const logger = require("morgan");
 const https = require("https");
 const fs = require("fs");
 
 const app = express();
 const port = 4000;
-
-app.use(
-  session({
-    secret: "onelinediary",
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      domain: "localhost",
-      path: "/",
-      maxAge: 24 * 6 * 60 * 10000,
-      sameSite: "None",
-      httpOnly: true,
-      secure: true,
-    },
-  })
-);
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -32,7 +15,7 @@ app.use(
   cors({
     origin: "https://localhost:3000",
     credentials: true,
-    methods: ["GET", "POST", "OPTIONS"],
+    methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
   })
 );
 
