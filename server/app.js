@@ -3,12 +3,7 @@ const app = express();
 const port = 80;
 const cors = require("cors");
 
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-  })
-);
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.status(201).send({
