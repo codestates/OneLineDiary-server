@@ -22,6 +22,7 @@ app.use(
 app.use(cookieParser());
 
 app.post("/user/login", controllers.usersController.login);
+app.post("/user/signup", controllers.usersController.signup);
 
 const port = 4000;
 
