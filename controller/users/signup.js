@@ -1,4 +1,3 @@
-const { send } = require("node:process");
 const { user } = require("../../models");
 
 module.exports = (req, res) => {
