@@ -3,11 +3,10 @@ const { sign, verify } = require("jsonwebtoken");
 
 module.exports = {
   generateAccessToken: (data) => {
-    process.env.ACCESS_SECRET = "first";
-    return sign(data, process.env.ACCESS_SECRET, { expiresIn: "15s" });
+    return sign(data, process.env.ACCESS_SECRET, { expiresIn: "60m" });
+    //임시로 만료시간 60분 설정 짧게 설정해야한다.
   },
   generateRefreshToken: (data) => {
-    process.env.REFRESH_SECRET = "project";
     return sign(data, process.env.REFRESH_SECRET, { expiresIn: "30d" });
   },
   sendRefreshToken: (res, refreshToken) => {
@@ -15,11 +14,18 @@ module.exports = {
       httpOnly: true,
     });
   },
-  sendAccessToken: (res, accessToken) => {
-    res.json({ data: { accessToken }, message: "ok" });
-  },
-  resendAccessToken: (res, accessToken, data) => {
-    res.json({ data: { accessToken, userInfo: data }, message: "ok" });
+  // 처음 로그인 할 때
+  sendAccessToken: (res, accessToken, data) => {
+    // { accessToken: accessToken , message: "ok", userInfo:{id:userId, nickname:nickname} }
+    // console.log(data.dataValues.nickname);
+    res.json({
+      accessToken: accessToken,
+      message: "ok",
+      userInfo: {
+        id: data.dataValues.userId,
+        nickname: data.dataValues.nickname,
+      },
+    });
   },
   isAuthorized: (req) => {
     const authorization = req.headers["authorization"];

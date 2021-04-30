@@ -23,9 +23,9 @@ module.exports = (req, res) => {
       delete data.dataValues.password;
       const accessToken = generateAccessToken(data.dataValues);
       const refreshToken = generateRefreshToken(data.dataValues);
-
+      console.log(accessToken);
       sendRefreshToken(res, refreshToken);
-      sendAccessToken(res, accessToken);
+      sendAccessToken(res, accessToken, data);
     })
     .catch((err) => {
       console.log(err);

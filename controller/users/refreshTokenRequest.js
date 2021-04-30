@@ -1,7 +1,7 @@
 const {
   checkRefeshToken,
   generateAccessToken,
-  resendAccessToken,
+  sendAccessToken,
 } = require("../tokenFunctions");
 const { Users } = require("../../models");
 
@@ -33,7 +33,7 @@ module.exports = (req, res) => {
       delete data.dataValues.password;
 
       const newAccessToken = generateAccessToken(data.dataValues);
-      resendAccessToken(res, newAccessToken, data.dataValues);
+      sendAccessToken(res, newAccessToken, data.dataValues);
     })
     .catch((err) => {
       console.log(err);
