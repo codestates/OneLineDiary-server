@@ -1,26 +1,47 @@
-const express = require("express");
 const cors = require("cors");
 const logger = require("morgan");
-
-const mainController = require("./controller");
+const https = require("https");
+const fs = require("fs");
+const express = require("express");
 const app = express();
-const port = 4000;
+const cookieParser = require("cookie-parser");
+
+const controllers = require("./controller");
 
 app.use(logger("dev"));
+//cors 처리
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
-//cors 처리
 app.use(
   cors({
-    origin: "https://localhost:3000",
+    origin: ["https://localhost:3000"],
     credentials: true,
-    methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
+    methods: ["GET", "POST", "OPTIONS"],
   })
 );
+app.use(cookieParser());
 
-// app.get("/mypage/userinfo", mainController.mypageController);
+app.post("/user/login", controllers.usersController.login);
 
-app.listen(port, () => {
-  console.log(`server listening on ${port}`);
-});
+const port = 4000;
+
+// 주소 확인할 때 > `https://localhost:{port}`
+let server;
+
+if (fs.existsSync("./key.pem") && fs.existsSync("./cert.pem")) {
+  console.log("good");
+  const privateKey = fs.readFileSync(__dirname + "/key.pem", "utf8");
+  const certificate = fs.readFileSync(__dirname + "/cert.pem", "utf8");
+  const credentials = { key: privateKey, cert: certificate };
+
+  server = https.createServer(credentials, app);
+  server.listen(port, () => console.log("server runnning"));
+} else {
+  server = app.listen(port);
+}
+
+module.exports = server;
+
+// app.listen(port, () => {
+//   console.log(`server listening on ${port}`);
+// });

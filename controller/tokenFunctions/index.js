@@ -3,9 +3,11 @@ const { sign, verify } = require("jsonwebtoken");
 
 module.exports = {
   generateAccessToken: (data) => {
+    process.env.ACCESS_SECRET = "hello";
     return sign(data, process.env.ACCESS_SECRET, { expiresIn: "15s" });
   },
   generateRefreshToken: (data) => {
+    process.env.REFRESH_SECRET = "world";
     return sign(data, process.env.REFRESH_SECRET, { expiresIn: "30d" });
   },
   sendRefreshToken: (res, refreshToken) => {
