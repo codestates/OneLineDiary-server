@@ -27,7 +27,6 @@ const port = 4000;
 
 // 주소 확인할 때 > `https://localhost:{port}`
 let server;
-
 if (fs.existsSync("./key.pem") && fs.existsSync("./cert.pem")) {
   console.log("good");
   const privateKey = fs.readFileSync(__dirname + "/key.pem", "utf8");
@@ -39,7 +38,6 @@ if (fs.existsSync("./key.pem") && fs.existsSync("./cert.pem")) {
 } else {
   server = app.listen(port);
 }
-
 module.exports = server;
 
 // app.listen(port, () => {

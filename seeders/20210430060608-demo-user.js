@@ -6,11 +6,11 @@ module.exports = {
       "users",
       [
         {
-          userId: "John Doe",
-          nickname: "hello",
-          password: "world",
-          createdAt: "2021.04.30",
-          updatedAt: "2021.04.30",
+          userId: "hoyong@codestates.com",
+          nickname: "hoyong",
+          password: "password",
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
       ],
       {}
