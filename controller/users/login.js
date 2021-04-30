@@ -5,7 +5,6 @@ const {
   sendRefreshToken,
   sendAccessToken,
 } = require("../tokenFunctions");
-const jwt = require("jsonwebtoken");
 
 module.exports = (req, res) => {
   const { userId, password } = req.body;
@@ -38,6 +37,8 @@ module.exports = (req, res) => {
 // 아이디와 비밀번호를 받으면 db에 있는지 확인하고 없으면 에러
 // 있으면 토큰 발급
 //sequelize
+
+// const jwt = require("jsonwebtoken");
 // module.exports = async (req, res) => {
 //   const userInfo = await user.findOne({
 //     where: { userId: req.body.userId, password: req.body.password },
