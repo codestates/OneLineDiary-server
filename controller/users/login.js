@@ -16,7 +16,6 @@ module.exports = (req, res) => {
       },
     })
     .then((data) => {
-      // console.log(data);
       if (!data) {
         // return res.status(401).send({ data: null, message: 'not authorized' });
         return res.json({ data: null, message: "not authorized" });
