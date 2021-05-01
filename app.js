@@ -25,6 +25,7 @@ app.post("/user/login", controllers.usersController.login);
 app.post("/user/signup", controllers.usersController.signup);
 //request 값 없이 정보 불러오는게 맞음 이미 있으니까
 app.get("/mypage/userinfo", controllers.mypageController.userinfo);
+app.get("/main", controllers.mainController.main);
 
 const port = 4000;
 

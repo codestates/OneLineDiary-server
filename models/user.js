@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.user.hasMany(models.post, {
+        foreignKey: "userId",
+        sourceKey: "userId",
+      });
     }
   }
   user.init(
@@ -16,7 +20,6 @@ module.exports = (sequelize, DataTypes) => {
       nickname: DataTypes.STRING,
       userId: DataTypes.STRING,
       password: DataTypes.STRING,
-      post_id: DataTypes.INTEGER,
     },
     {
       sequelize,
