@@ -26,6 +26,7 @@ app.post("/user/logout", controllers.usersController.logout);
 app.post("/user/signup", controllers.usersController.signup);
 //request 값 없이 정보 불러오는게 맞음 이미 있으니까
 app.get("/mypage/userinfo", controllers.mypageController.userinfo);
+app.patch("/mypage/editUserinfo", controllers.mypageController.editUserinfo);
 
 const port = 4000;
 
