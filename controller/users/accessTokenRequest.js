@@ -8,6 +8,7 @@ module.exports = (req, res) => {
     return res.json({ data: null, message: "invalid access token" });
   }
   const { userId } = accessTokenData;
+  console.log(userId);
   Users.findOne({ where: { userId } })
     .then((data) => {
       if (!data) {
