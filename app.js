@@ -21,11 +21,14 @@ app.use(
 );
 app.use(cookieParser());
 
+// user
 app.post("/user/login", controllers.usersController.login);
 app.post("/user/signup", controllers.usersController.signup);
-//request 값 없이 정보 불러오는게 맞음 이미 있으니까
+// mypage
 app.get("/mypage/userinfo", controllers.mypageController.userinfo);
+// main
 app.get("/main", controllers.mainController.main);
+app.post("/main/post", controllers.mainController.diarypost);
 
 const port = 4000;
 

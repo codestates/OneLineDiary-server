@@ -1,4 +1,3 @@
-const { access } = require("node:fs");
 const { user, post, post_info, emoji } = require("../../models");
 const { isAuthorized } = require("../tokenFunctions");
 
