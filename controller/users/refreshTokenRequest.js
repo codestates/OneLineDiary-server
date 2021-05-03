@@ -3,7 +3,7 @@ const {
   generateAccessToken,
   sendAccessToken,
 } = require("../tokenFunctions");
-const { Users } = require("../../models");
+const { user } = require("../../models");
 
 module.exports = (req, res) => {
   const refreshToken = req.cookies.refreshToken;
@@ -22,7 +22,8 @@ module.exports = (req, res) => {
   }
 
   const { userId } = refreshTokenData;
-  Users.findOne({ where: { userId } })
+  user
+    .findOne({ where: { userId } })
     .then((data) => {
       if (!data) {
         return res.json({
