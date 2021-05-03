@@ -27,9 +27,11 @@ app.post("/user/logout", controllers.usersController.logout);
 app.post("/user/signup", controllers.usersController.signup);
 // mypage
 app.get("/mypage/userinfo", controllers.mypageController.userinfo);
+
 app.patch("/mypage/editUserinfo", controllers.mypageController.editUserinfo);
 app.get("/main", controllers.mainController.main);
 app.patch("/main/update", controllers.mainController.diaryupdate);
+
 app.delete("/main/delete", controllers.mainController.diarydelete);
 
 const port = 4000;

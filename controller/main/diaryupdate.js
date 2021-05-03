@@ -1,4 +1,5 @@
 const { isAuthorized } = require("../tokenFunctions");
+
 const { post, emoji } = require("../../models");
 
 module.exports = async (req, res) => {
@@ -17,6 +18,7 @@ module.exports = async (req, res) => {
       res.status(200).json({ message: "일기 내용이 수정되었습니다" });
     } else if (content) {
       await contentInfo.update({ content: changeContent });
+
 
       res.status(200).json({ message: "일기 내용이 수정되었습니다" });
     }
