@@ -32,12 +32,14 @@ module.exports = (req, res) => {
       ],
     })
     .then((data) => {
-      console.log(data[0].dataValues.nickname);
-      console.log(data[0].dataValues.posts.map((el) => el.dataValues.content));
+      console.log("nickname:", data[0].dataValues.nickname);
       console.log(
-        data[0].dataValues.posts.map(
-          (el) => el.dataValues.post_infos[0].dataValues.emoji
-        )
+        "content:",
+        data[0].dataValues.posts.map((el) => el.dataValues.content)
+      );
+      console.log(
+        "emoji:",
+        data[0].dataValues.posts.map((el) => el.dataValues.post_infos[0])
       );
       if (!data) {
         // return res.status(401).send({ data: null, message: 'not authorized' });
