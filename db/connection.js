@@ -1,18 +1,18 @@
-// const mysql = require("mysql");
-// const dotenv = require("dotenv");
-// dotenv.config();
+const mysql = require("mysql");
+const dotenv = require("dotenv");
+dotenv.config();
 
-// const con = mysql.createConnection({
-//   host: process.env.DATABASE_HOST,
-//   user: process.env.DATABASE_USER,
-//   password: process.env.DATABASE_PASSWORD,
-//   port: process.env.DATABASE_PORT,
-// });
+const con = mysql.createConnection({
+  host: process.env.DATABASE_HOST_TEST,
+  user: process.env.DATABASE_USERNAME,
+  password: process.env.DATABASE_PASSWORD_TEST,
+  port: process.env.DATABASE_PORT_TEST,
+});
 
-// con.connect((err) => {
-//   if (err) {
-//     con.end();
-//   }
-// });
+con.connect((err) => {
+  if (err) {
+    con.end();
+  }
+});
 
-// module.exports = con;
+module.exports = con;

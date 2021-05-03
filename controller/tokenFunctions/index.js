@@ -18,12 +18,13 @@ module.exports = {
   sendAccessToken: (res, accessToken, data) => {
     // { accessToken: accessToken , message: "ok", userInfo:{id:userId, nickname:nickname} }
     // console.log(data.dataValues.nickname);
+    console.log(data);
     res.json({
       accessToken: accessToken,
       message: "ok",
       userInfo: {
-        id: data.dataValues.userId,
-        nickname: data.dataValues.nickname,
+        id: data.userId,
+        nickname: data.nickname,
       },
     });
   },

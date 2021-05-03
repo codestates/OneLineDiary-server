@@ -9,21 +9,8 @@ module.exports = (req, res) => {
   // console.log(accessTokenData);
   //왜 같은 토큰을 넣어도 null이 나오지 >> 토큰 시간 만료 때문
   if (!accessTokenData) {
-    if (req.cookies.refreshToken) {
-      const refreshToken = req.cookies.refreshToken;
-      refreshTokenRequest(req);
-      const refreshTokenData = checkRefeshToken(refreshToken);
-      const { userId } = refreshTokenData;
-      user.findOne({ where: { userId } }).then((data) => {
-        console.log("여기");
-        res.json({
-          userId: data.dataValues.userId,
-          password: data.dataValues.password,
-          nickname: data.dataValues.nickname,
-          message: "ok",
-        });
-      });
-    }
+    refreshTokenRequest(req, res);
+    // 이러고 다시 원래 창으로 돌아가야하는데 이게 되는건가?
   } else {
     const { userId } = accessTokenData;
     console.log(accessTokenData);
