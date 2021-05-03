@@ -29,6 +29,8 @@ app.get("/mypage/userinfo", controllers.mypageController.userinfo);
 // main
 app.get("/main", controllers.mainController.main);
 app.post("/main/post", controllers.mainController.diarypost);
+app.patch("/main/update", controllers.mainController.diaryupdate);
+app.delete("/main/delete", controllers.mainController.diarydelete);
 
 const port = 4000;
 

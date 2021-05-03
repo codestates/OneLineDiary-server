@@ -32,7 +32,13 @@ module.exports = (req, res) => {
       ],
     })
     .then((data) => {
-      //   console.log(data[0].dataValues.posts[1].dataValues.createdAt);
+      console.log(data[0].dataValues.nickname);
+      console.log(data[0].dataValues.posts.map((el) => el.dataValues.content));
+      console.log(
+        data[0].dataValues.posts.map(
+          (el) => el.dataValues.post_infos[0].dataValues.emoji
+        )
+      );
       if (!data) {
         // return res.status(401).send({ data: null, message: 'not authorized' });
         return res.json({
