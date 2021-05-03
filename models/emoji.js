@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class emoji extends Model {
     /**
@@ -11,13 +9,20 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.emoji.hasMany(models.post_info, {
+        foreignKey: "emoji_id",
+        sourceKey: "id",
+      });
     }
-  };
-  emoji.init({
-    image: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'emoji',
-  });
+  }
+  emoji.init(
+    {
+      emoji: DataTypes.STRING,
+    },
+    {
+      sequelize,
+      modelName: "emoji",
+    }
+  );
   return emoji;
 };
