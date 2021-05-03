@@ -11,6 +11,24 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          post_id: 1,
+          emoji_id: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          post_id: 1,
+          emoji_id: 3,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          post_id: 1,
+          emoji_id: 4,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );

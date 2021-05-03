@@ -1,8 +1,8 @@
 const { user } = require("../../models");
 
 module.exports = (req, res) => {
-  const { id, password, nickname } = req.body;
-  console.log(id, password, nickname);
+  const { userId, password, nickname } = req.body;
+  console.log(userId, password, nickname);
   //입력받은 값이 부족하면 에러 메세지 보낸다.
   const keyLength = Object.keys(req.body).length;
   if (keyLength !== 3) {
@@ -12,7 +12,7 @@ module.exports = (req, res) => {
     user
       .findOne({
         where: {
-          userId: id,
+          userId: userId,
           password: password,
           nickname: nickname,
         },
@@ -20,10 +20,10 @@ module.exports = (req, res) => {
       .then((data) => {
         if (!data) {
           //db에 정보가 없으면 저장하고 로그인 창으로 돌려보낸다.
-          console.log(req.body);
+          // console.log(req.body);
           //db에 저장하는 부분
           user.create({
-            userId: id,
+            userId: userId,
             password: password,
             nickname: nickname,
           });
