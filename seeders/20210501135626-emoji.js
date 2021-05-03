@@ -6,6 +6,7 @@ module.exports = {
       "emojis",
       [
         {
+          id: 1,
           emoji: "emoji",
           createdAt: new Date(),
           updatedAt: new Date(),

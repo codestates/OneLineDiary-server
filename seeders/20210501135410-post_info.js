@@ -6,26 +6,9 @@ module.exports = {
       "post_infos",
       [
         {
+          id: 1,
           post_id: 1,
           emoji_id: 1,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          post_id: 1,
-          emoji_id: 2,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          post_id: 1,
-          emoji_id: 3,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          post_id: 1,
-          emoji_id: 4,
           createdAt: new Date(),
           updatedAt: new Date(),
         },

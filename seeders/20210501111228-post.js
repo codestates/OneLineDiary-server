@@ -6,6 +6,7 @@ module.exports = {
       "posts",
       [
         {
+          id: 1,
           userId: "hoyong@codestates.com",
           content: "안녕하세요",
           createdAt: new Date(),
