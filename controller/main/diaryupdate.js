@@ -1,4 +1,5 @@
 const { isAuthorized } = require("../tokenFunctions");
+
 const { post, emoji } = require("../../models");
 const refreshTokenRequest = require("../users/refreshTokenRequest");
 const db = require("../../db/connection");
@@ -39,6 +40,7 @@ module.exports = (req, res) => {
         res.status(200).json({ message: "일기 내용이 수정되었습니다" });
       }
     });
+
   }
 };
 

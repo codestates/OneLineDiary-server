@@ -3,4 +3,5 @@ module.exports = {
   diarypost: require("./diarypost"),
   diarydelete: require("./diarydelete"),
   diaryupdate: require("./diaryupdate"),
+
 };

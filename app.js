@@ -27,6 +27,7 @@ app.post("/user/logout", controllers.usersController.logout);
 app.post("/user/signup", controllers.usersController.signup);
 // mypage
 app.get("/mypage/userinfo", controllers.mypageController.userinfo);
+
 app.patch("/mypage/editUserinfo", controllers.mypageController.editUserinfo);
 // post
 app.get("/main", controllers.mainController.main);
