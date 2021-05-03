@@ -1,40 +1,76 @@
-const { user } = require("../../models");
+// const { user } = require("../../models");
 const {
   generateAccessToken,
   generateRefreshToken,
   sendRefreshToken,
   sendAccessToken,
 } = require("../tokenFunctions");
+const db = require("../../db/connection");
 
 module.exports = (req, res) => {
-  const { userId, password } = req.body;
-  user
-    .findOne({
-      where: {
-        userId,
-        password,
-      },
-    })
-    .then((data) => {
-      if (!data) {
-        // return res.status(401).send({ data: null, message: 'not authorized' });
-        return res.json({ data: null, message: "not authorized" });
+  // const { userId, password } = req.body;
+  db.query("use test", (err) => {
+    if (err) {
+      return res.status(200).send("데이터베이스에 연결하지 못했습니다");
+    }
+    console.log(req.body.userId);
+    db.query(
+      `select * from users where userId = '${req.body.userId}'`,
+      (err, data) => {
+        if (err) {
+          return res.status(400).json({ message: "일치하는 정보가 없습니다" });
+        }
+        if (data.length === 0) {
+          // return res.status(401).send({ data: null, message: 'not authorized' });
+          return res.status(400).json({ message: "일치하는 정보가 없습니다" });
+        }
+        delete data[0].password;
+        const result = {
+          id: data[0].id,
+          userId: data[0].userId,
+          nickname: data[0].nickname,
+          password: data[0].password,
+          createdAt: data[0].createdAt,
+          updatedAt: data[0].updatedAt,
+        };
+        console.log(result);
+        const accessToken = generateAccessToken(result);
+        const refreshToken = generateRefreshToken(result);
+        console.log(accessToken);
+        sendRefreshToken(res, refreshToken);
+        sendAccessToken(res, accessToken, result);
       }
-      delete data.dataValues.password;
-      const accessToken = generateAccessToken(data.dataValues);
-      const refreshToken = generateRefreshToken(data.dataValues);
-      console.log(accessToken);
-      sendRefreshToken(res, refreshToken);
-      sendAccessToken(res, accessToken, data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    );
+  });
+  //sequelize로 만들 때
+  // user
+  //   .findOne({
+  //     where: {
+  //       userId,
+  //       password,
+  //     },
+  //   })
+  //   .then((data) => {
+  //     if (!data) {
+  //       // return res.status(401).send({ data: null, message: 'not authorized' });
+  //       return res.json({ data: null, message: "not authorized" });
+  //     }
+  //     console.log(data.dataValues);
+  //     delete data.dataValues.password;
+  //     const accessToken = generateAccessToken(data.dataValues);
+  //     const refreshToken = generateRefreshToken(data.dataValues);
+  //     console.log(accessToken);
+  //     sendRefreshToken(res, refreshToken);
+  //     sendAccessToken(res, accessToken, data);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
 };
 
 // 아이디와 비밀번호를 받으면 db에 있는지 확인하고 없으면 에러
 // 있으면 토큰 발급
-//sequelize
+//sequelize 다른 방법
 
 // const jwt = require("jsonwebtoken");
 // module.exports = async (req, res) => {
