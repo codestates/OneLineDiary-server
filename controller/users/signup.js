@@ -22,7 +22,7 @@ module.exports = (req, res) => {
           if (data.length === 0) {
             // 내용 없으면 db에 저장
             db.query(
-              `insert into users(userId, password, nickname) values ('${userId}', '${password}', '${nickname}')`
+              `insert into users(userId, password, nickname, createdAt, updatedAt) values ('${userId}', '${password}', '${nickname}', now(), now())`
             );
             const message = { messages: "회원가입에 성공하셨습니다" };
             res.status(200).send(message);

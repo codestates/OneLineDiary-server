@@ -18,7 +18,7 @@ module.exports = {
   sendAccessToken: (res, accessToken, data) => {
     // { accessToken: accessToken , message: "ok", userInfo:{id:userId, nickname:nickname} }
     // console.log(data.dataValues.nickname);
-    console.log(data);
+    // console.log(data);
     res.json({
       accessToken: accessToken,
       message: "ok",
