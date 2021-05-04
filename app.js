@@ -14,9 +14,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({
-    origin: true,
+    origin: ["https://localhost:3000"],
     credentials: true,
-    methods: ["GET", "POST", "OPTIONS"],
+    methods: ["GET", "POST", "OPTIONS", "PATCH"],
   })
 );
 app.use(cookieParser());
@@ -37,21 +37,21 @@ app.post("/main/delete", controllers.mainController.diarydelete);
 const port = 4000;
 
 // 주소 확인할 때 > `https://localhost:{port}`
-// let server;
-// if (fs.existsSync("./key.pem") && fs.existsSync("./cert.pem")) {
-//   const privateKey = fs.readFileSync(__dirname + "/key.pem", "utf8");
-//   const certificate = fs.readFileSync(__dirname + "/cert.pem", "utf8");
-//   const credentials = { key: privateKey, cert: certificate };
+let server;
+if (fs.existsSync("./key.pem") && fs.existsSync("./cert.pem")) {
+  const privateKey = fs.readFileSync(__dirname + "/key.pem", "utf8");
+  const certificate = fs.readFileSync(__dirname + "/cert.pem", "utf8");
+  const credentials = { key: privateKey, cert: certificate };
 
-//   server = https.createServer(credentials, app);
-//   server.listen(port, () => console.log(`server listening on ${port}`));
-// } else {
-//   server = app.listen(port, () => {
-//     console.log(`server listening on ${port}`);
-//   });
-// }
+  server = https.createServer(credentials, app);
+  server.listen(port, () => console.log(`server listening on https ${port}`));
+} else {
+  server = app.listen(port, () => {
+    console.log(`server listening on http ${port}`);
+  });
+}
 
-// module.exports = server;
-app.listen(port, () => {
-  console.log(`server listening on ${port}`);
-});
+module.exports = server;
+// app.listen(port, () => {
+//   console.log(`server listening on ${port}`);
+// });

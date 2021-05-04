@@ -1,6 +1,7 @@
 const { isAuthorized, checkRefeshToken } = require("../tokenFunctions");
 const { user } = require("../../models");
 const refreshTokenRequest = require("../users/refreshTokenRequest");
+const db = require("../../db/connection");
 
 module.exports = (req, res) => {
   // 15초인 이유가 요청 할때마다 새로 토큰을 만들게? 만료가 되면 리프레시 토큰으로 불러와서 다시 발급
@@ -14,26 +15,30 @@ module.exports = (req, res) => {
   } else {
     const { userId } = accessTokenData;
     console.log(accessTokenData);
-    user
-      .findOne({ where: { userId } })
-      .then((data) => {
-        if (!data) {
-          // return res.status(401).send({ data: null, message: 'not authorized' });
+    db.query("use test", (err, result) => {
+      if (err) {
+        return res.status(200).send("데이터베이스에 연결하지 못했습니다");
+      }
+      db.query(
+        `select * from users where userId = '${userId}' limit 1`,
+        (err, data) => {
+          // console.log(data);
+          if (!data) {
+            // return res.status(401).send({ data: null, message: 'not authorized' });
+            return res.json({
+              data: null,
+              message: "access token has been tempered",
+            });
+          }
+          console.log("asdasdasd", data[0]);
           return res.json({
-            data: null,
-            message: "access token has been tempered",
+            userId: data[0].userId,
+            password: data[0].password,
+            nickname: data[0].nickname,
+            message: "ok",
           });
         }
-        console.log("아님여기!");
-        return res.json({
-          userId: data.dataValues.userId,
-          password: data.dataValues.password,
-          nickname: data.dataValues.nickname,
-          message: "ok",
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      );
+    });
   }
 };

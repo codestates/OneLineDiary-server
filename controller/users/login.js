@@ -15,7 +15,7 @@ module.exports = (req, res) => {
     }
     console.log(req.body.userId);
     db.query(
-      `select * from users where userId = '${req.body.userId}'`,
+      `select * from users where userId = '${req.body.userId}' and password = '${req.body.password}'`,
       (err, data) => {
         if (err) {
           return res.status(400).json({ message: "일치하는 정보가 없습니다" });
