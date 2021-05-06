@@ -25,6 +25,7 @@ app.use(cookieParser());
 app.post("/user/login", controllers.usersController.login);
 app.post("/user/logout", controllers.usersController.logout);
 app.post("/user/signup", controllers.usersController.signup);
+app.post("/user/inputcheck", controllers.usersController.inputcheck);
 // mypage
 app.get("/mypage/userinfo", controllers.mypageController.userinfo);
 
