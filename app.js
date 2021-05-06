@@ -36,24 +36,24 @@ app.post("/main/post", controllers.mainController.diarypost);
 app.patch("/main/update", controllers.mainController.diaryupdate);
 app.post("/main/delete", controllers.mainController.diarydelete);
 
-const port = 4000;
+const port = 80;
 
 // 주소 확인할 때 > `https://localhost:{port}`
-let server;
-if (fs.existsSync("./key.pem") && fs.existsSync("./cert.pem")) {
-  const privateKey = fs.readFileSync(__dirname + "/key.pem", "utf8");
-  const certificate = fs.readFileSync(__dirname + "/cert.pem", "utf8");
-  const credentials = { key: privateKey, cert: certificate };
+//let server;
+//if (fs.existsSync("./key.pem") && fs.existsSync("./cert.pem")) {
+  //const privateKey = fs.readFileSync(__dirname + "/key.pem", "utf8");
+  //const certificate = fs.readFileSync(__dirname + "/cert.pem", "utf8");
+  //const credentials = { key: privateKey, cert: certificate };
 
-  server = https.createServer(credentials, app);
-  server.listen(port, () => console.log(`server listening on https ${port}`));
-} else {
-  server = app.listen(port, () => {
-    console.log(`server listening on http ${port}`);
-  });
-}
+  //server = https.createServer(credentials, app);
+  //server.listen(port, () => console.log(`server listening on https ${port}`));
+//} else {
+  //server = app.listen(port, () => {
+    //console.log(`server listening on http ${port}`);
+  //});
+//}
 
-module.exports = server;
-// app.listen(port, () => {
-//   console.log(`server listening on ${port}`);
-// });
+//module.exports = server;
+ app.listen(port, () => {
+   console.log(`server listening on ${port}`);
+ });
